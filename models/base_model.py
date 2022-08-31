@@ -9,10 +9,14 @@ class BaseModel:
        self.updated_at = datetime.now()
 
     def __str__(self):
-        string_representation = f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
-        return string_representation
+        self.string_representation = f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
+        return self.string_representation
 
-if __name__ == '__main__':
-    my_model = BaseModel()
-    print(my_model)
-       
+    def save(self):
+        self.updated_at = datetime.now()
+    
+    def to_dict(self):
+        self.__dict__['__class__'] = self.__class__.__name__
+        return self.__dict__
+
+
