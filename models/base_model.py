@@ -9,14 +9,14 @@ class BaseModel:
        self.updated_at = datetime.now()
 
     def __str__(self):
-        self.string_representation = f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
-        return self.string_representation
+        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.now()
     
     def to_dict(self):
         self.__dict__['__class__'] = self.__class__.__name__
+        self.created_at = self.created_at.isoformat(timespec='microseconds')
+        self.updated_at = self.updated_at.isoformat(timespec='microseconds')
         return self.__dict__
-
 
