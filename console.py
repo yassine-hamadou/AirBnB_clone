@@ -28,7 +28,7 @@ def parse(arg):
         return retl
 
 
-class AirBnBShell(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """Command processor for our AirBnB Project."""
     prompt = '(hbnb) '
 
@@ -40,5 +40,9 @@ class AirBnBShell(cmd.Cmd):
         """End of File"""
         return True
 
+    def emptyline(self):
+        """Execute nothing """
+        pass
+
 if __name__ == '__main__':
-    AirBnBShell().cmdloop()
+    HBNBCommand().cmdloop()
