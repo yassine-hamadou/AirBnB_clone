@@ -2,6 +2,7 @@
 """AirBnB command interpreter"""
 import cmd
 import re
+from models import storage
 from shlex import split
 from models.base_model import BaseModel
 
@@ -54,6 +55,24 @@ class HBNBCommand(cmd.Cmd):
             instance = eval[args]()
             instance.save()
             print(instance.id)
+
+    def do_show(self, args):
+        """ Prints str representation of an instance """
+        if not (args):
+            print("** class name missing **")
+        else:
+            args = args.split()
+            if len(args) != 2:
+                print("** instance id missing **")
+            elif args[0] not in classes:
+                print("** class doesn't exist **")
+            else:
+                for k, v in storage.all().items():
+                    if args[1] == v.id:
+                        print(v)
+                        return
+                print("** no instance found **")
+
 
             
 if __name__ == '__main__':
