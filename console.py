@@ -2,6 +2,8 @@
 """AirBnB command interpreter"""
 import cmd
 import re
+import models
+import json
 from models import storage
 from shlex import split
 from models.base_model import BaseModel
@@ -91,6 +93,24 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
                 return
         print("** no instance found **")
+
+    def do_all(self, args):
+        """ Prints all str representation of all instances """
+        split_args = shlex.split(args)
+        n_list = []
+        dict_json = models.storage.all()
+        if args:
+            try:
+                for key in models.storage.all():
+                    if split_args[0] == key.split('.')[0]:
+                        n_list.append(str(dict_json[key]))
+                print(n_list)
+            except Exception:
+                print("** class doesn't exist **")
+        else:
+            for key in models.storage.all():
+                n_list.append(str(models.storage.all()[key]))
+            print(n_list)
 
 
             
