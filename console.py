@@ -3,13 +3,14 @@
 import cmd
 import re
 import models
+from shlex import split
 import json
 from models import storage
 from shlex import split
 from models.base_model import BaseModel
 
 classes = [
-    "BaseModel"
+    "BaseModel", "User", "State", "City", "Amenity", "Place", "Review"
 ]
 
 
@@ -96,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Prints all str representation of all instances """
-        split_args = args.split(args)
+        split_args = shlex.split(args)
         n_list = []
         dict_json = models.storage.all()
         if args:
