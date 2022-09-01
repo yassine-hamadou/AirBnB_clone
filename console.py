@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Prints all str representation of all instances """
-        split_args = shlex.split(args)
+        split_args = args.split(args)
         n_list = []
         dict_json = models.storage.all()
         if args:
@@ -111,6 +111,31 @@ class HBNBCommand(cmd.Cmd):
             for key in models.storage.all():
                 n_list.append(str(models.storage.all()[key]))
             print(n_list)
+
+    def do_update(self, args):
+        """ Updates an instance based on the class name and id """
+        args = args.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
+        if args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + '.' + args[1]
+                if key in storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            setattr(storage.all()[key], args[2], args[3])
+                            storage.all()[key].save()
+                        else:
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
 
             
