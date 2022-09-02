@@ -29,7 +29,7 @@ class BaseModel:
                         setattr(self, key, value)
             
     def __str__(self):
-        """Returns printable string representation of Object"""
+        """Prints a string representaion of object."""
         string = "[{}] ({}) <{}>".format(type(self).__name__,
                                          self.id,
                                          self.__dict__)
