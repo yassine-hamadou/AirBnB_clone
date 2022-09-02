@@ -12,7 +12,7 @@ from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """
-    The test suite for models.base_model
+    Unit test for base Model.
     """
 
     def test_if_BaseModel_instance_has_id(self):
@@ -20,7 +20,7 @@ class TestBaseModel(unittest.TestCase):
         Checks the test suite for models.base_model.BaseModel
         """
         b = BaseModel()
-        self.assertTrue(hasattr(b, "id"))  # add assertion here
+        self.assertTrue(hasattr(b, "id"))  
 
     def test_str_rep(self):
         """
