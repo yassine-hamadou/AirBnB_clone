@@ -5,6 +5,7 @@ This module contains the BaseModel class that defines all common attributes/meth
 
 from uuid import uuid4
 from datetime import datetime
+import models
 
 class BaseModel:
     """
@@ -12,41 +13,40 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """
-        This is the object initializer
-        """
+        """Initializes the BaseModel"""
 
-        self.created_at = datetime.now()     
-        self.id = str(uuid4())
-        self.updated_at = datetime.now()
-        if len(kwargs) != 0:
-            for key in kwargs.keys():
-                if key != "__class__":
-                    if (key == "created_at") or (key == "updated_at"):
-                        print(f"hey {kwargs[key]}")
-                        self.__dict__[f"{key}"] = datetime.fromisoformat(kwargs[key])
-                    else:
-                        self.__dict__[f"{key}"] = kwargs[key]       
-        else:
+        if not kwargs:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
+            self.created_at = self.updated_at = datetime.now()
+            models.storage.new(self)
+            models.storage.save()
+        else:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key in ('created_at', 'updated_at'):
+                        setattr(self, key, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, key, value)
             
     def __str__(self):
-        """
-        This method is called whenever a the print function is called on an object of this class
-        """
-        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
+        """Returns printable string representation of Object"""
+        string = "[{}] ({}) <{}>".format(type(self).__name__,
+                                         self.id,
+                                         self.__dict__)
+        return string
 
     def save(self):
-        """Update the time of the of the object""" 
+        """Save method updates the public instance attribute `updated_at` """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
+        """Returns diction representation of the object
         """
-        return a dictionary containing all keys/values of the instance
-        """
-        self.__dict__['__class__'] = self.__class__.__name__
-        self.created_at = self.created_at.isoformat(timespec='microseconds')
-        self.updated_at = self.updated_at.isoformat(timespec='microseconds')
-        return self.__dict__
-
+        dict_1 = self.__dict__.copy()
+        dict_1["__class__"] = self.__class__.__name__
+        for k, v in self.__dict__.items():
+            if k in ("created_at", "updated_at"):
+                v = self.__dict__[k].isoformat()
+                dict_1[k] = v
+        return dict_1
