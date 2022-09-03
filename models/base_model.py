@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-This module contains the BaseModel class that defines all common
-attributes/methods for other classes
+This module contains the BaseModel class that defines all common attributes/methods for other classes
 """
 
 from uuid import uuid4
