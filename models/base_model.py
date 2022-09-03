@@ -8,13 +8,17 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """
     BaseModel that defines all common attributes/methods for other classes
     """
 
     def __init__(self, *args, **kwargs):
-        """Initializes the BaseModel"""
+        """
+        This method is called whenever an object
+        is created from this class
+        """
 
         if not kwargs:
             self.id = str(uuid4())
@@ -31,7 +35,8 @@ class BaseModel:
 
     def __str__(self):
         """Prints a string representaion of object."""
-        string = "[{}] ({}) {}".format(type(self).__name__,
+        string = "[{}] ({}) {}".format(
+                type(self).__name__,
                 self.id, self.__dict__)
         return string
 
@@ -50,4 +55,3 @@ class BaseModel:
                 v = self.__dict__[k].isoformat()
                 dict_1[k] = v
         return dict_1
-
