@@ -30,8 +30,7 @@ class BaseModel:
 
     def __str__(self):
         """Prints a string representaion of object."""
-        string = "[{}] ({}) {}"
-        .format(type(self).__name__, self.id, self.__dict__)
+        string = "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
         return string
 
     def save(self):
