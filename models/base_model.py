@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This module contains the BaseModel class that defines all common attributes/methods for other classes
+This module contains the BaseModel class that defines all common
+attributes/methods for other classes
 """
 
 from uuid import uuid4
@@ -30,7 +31,8 @@ class BaseModel:
 
     def __str__(self):
         """Prints a string representaion of object."""
-        string = "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        string = "[{}] ({}) {}".format(type(self).__name__,
+                self.id, self.__dict__)
         return string
 
     def save(self):
