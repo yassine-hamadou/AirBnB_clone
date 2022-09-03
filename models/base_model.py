@@ -11,13 +11,20 @@ import models
 
 class BaseModel:
     """
-    BaseModel that defines all common attributes/methods for other classes
+    A base class for other classes
+    defines all attributes/method
+    all subclasses could inherit from
     """
 
     def __init__(self, *args, **kwargs):
         """
-        This method is called whenever an object
-        is created from this class
+        A class constructor
+        initializes the private instance variables
+        assigns new values to the variables
+        if no kwargs was passed
+        sets the **kwargs if it exists
+        using iteration
+        self.kwargs[key] = value
         """
 
         if not kwargs:
@@ -41,12 +48,21 @@ class BaseModel:
         return string
 
     def save(self):
-        """Save method updates the public instance attribute `updated_at` """
+        """
+        A base class that updates the "self.updated_at"
+        to the current time when the object was saved
+        """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Returns diction representation of the object
+        """
+        A method that returns a dictionary
+        containing all keys/values of __dict__ instance
+        with some added parameters
+        A key __class__ added
+        Created_at and Updated_at:
+            converted to string object in ISO format using .isoformat()
         """
         dict_1 = self.__dict__.copy()
         dict_1["__class__"] = self.__class__.__name__
