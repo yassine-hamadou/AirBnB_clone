@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
-"""
-    Contains the module that defines the amenity entity
-"""
+#!/usr/bin/python3
+"""Defines the Amenity class."""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
+    """Represent an amenity.
+
+    Attributes:
+        name (str): The name of the amenity.
     """
-        Describes the Amenity class which inherits the BaseModel
-        and adds a name
-    """
+
     name = ""

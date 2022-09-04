@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
-"""
-    A module containing the state model
-"""
+#!/usr/bin/python3
+"""Defines the State class."""
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
+    """Represent a state.
+
+    Attributes:
+        name (str): The name of the state.
     """
-        State model is a child of the BaseModel
-        it inherits all details and adds a name property
-    """
+
     name = ""
