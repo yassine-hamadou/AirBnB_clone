@@ -7,11 +7,6 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 
-classes = {
-    "BaseModel": BaseModel,
-    "User": User
-}
-
 
 class FileStorage:
     """
@@ -23,15 +18,15 @@ class FileStorage:
 
     def all(self):
         """
-        Returns self.__object which is a dictionary
+        Returns __object which is a dictionary
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
         sets in __objects the `obj` with key <obj class name>.id
         """
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        setattr(FileStorage.__objects, "{obj.__class__.__name__}.{obj.id}", obj)
 
     def save(self):
         """
