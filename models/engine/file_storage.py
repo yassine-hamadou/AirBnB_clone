@@ -20,13 +20,13 @@ class FileStorage:
         """
         Returns self.__object which is a dictionary
         """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """
         sets in __objects the `obj` with key <obj class name>.id
         """
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """
