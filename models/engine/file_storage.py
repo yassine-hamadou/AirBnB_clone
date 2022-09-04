@@ -1,10 +1,6 @@
 from models.base_model import BaseModel
 from models.user import User
 
-classes = {
-    "BaseModel": BaseModel,
-    "User": User
-}
 
 class FileStorage:
     """
@@ -33,14 +29,13 @@ class FileStorage:
         with open(self.__file_path, 'w') as f:
             json.dump(dict_storage, f)
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        only if file exists
-        """
+        """Deserialize the JSON file __file_path to __objects, if it exists."""
         try:
-            with open(self.__file_path, 'r') as f:
-                jOb = json.load(f)
-            for k in jOb:
-                self.__objects[k] = classes[jOb[k]["__class__"]](**jOb[k])
-        except IOError:
-            pass
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return
