@@ -18,15 +18,15 @@ class FileStorage:
 
     def all(self):
         """
-        Returns __object which is a dictionary
+        Returns self.__object which is a dictionary
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
         sets in __objects the `obj` with key <obj class name>.id
         """
-        setattr(self.__objects, f"{obj.__class__.__name__}.{obj.id}", obj)
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """
