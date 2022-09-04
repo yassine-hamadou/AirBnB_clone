@@ -26,7 +26,7 @@ class FileStorage:
         """
         sets in __objects the `obj` with key <obj class name>.id
         """
-        setattr(FileStorage, self.__objects["{obj.__class__.__name__}.{obj.id}"], obj)
+        setattr(FileStorage, self.__objects[f"{obj.__class__.__name__}.{obj.id}"], obj)
 
     def save(self):
         """
