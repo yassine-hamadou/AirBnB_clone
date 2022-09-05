@@ -1,14 +1,9 @@
-#!/usr/bin/env python3
-"""
-    Contains a module that has the city model
-"""
+#!/usr/bin/python3
+""" City Module for HBNB project """
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """
-        Defines the city properties by inheriting the BaseModel and
-        add a state id
-    """
-    name = ""
+    """ The city class, contains state ID and name """
     state_id = ""
+    name = ""
