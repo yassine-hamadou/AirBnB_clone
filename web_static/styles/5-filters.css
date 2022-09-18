@@ -2,7 +2,6 @@
 .amenities {
     height: 100%;
     width: 25%;
-    margin-left: 30px;
 }
 
 .locations {
@@ -13,6 +12,7 @@
 .amenities h3 {
     font-weight: 600;
     margin-bottom: 0;
+    padding-left: 30px;
 }
 
 .locations h4,
@@ -20,4 +20,5 @@
     font-weight: 400;
     font-size: 14px;
     display: inline;
+    padding-left: 30px;
 }
